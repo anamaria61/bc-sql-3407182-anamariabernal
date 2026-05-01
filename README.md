@@ -40,7 +40,7 @@ La tabla `classes` actúa como el motor relacional del sistema:
 Para reconstruir el esquema y verificar las tablas, ejecuta el siguiente comando en tu terminal:
 
 ```bash
-sqlite3 mi_escuela.db < proyecto_semanal.sql
+sqlite3 my_school.db < project2.sql
 
 🛠️ Comandos de Verificación incluidos
 El script finaliza con comandos administrativos para validar la estructura:
