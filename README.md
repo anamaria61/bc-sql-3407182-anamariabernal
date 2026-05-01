@@ -1,66 +1,50 @@
-Mi dominio es Escuela de Cocina 🍳
+# 🍳 Sistema de Gestión Gastronómica: Diseño de Esquemas (DDL)
 
-📊 Estructura de la Base de Datos
-La base de datos se compone de dos tablas principales:
+Este proyecto presenta el diseño de una base de datos relacional para una **Escuela de Cocina**, enfocándose en la integridad de los datos mediante el uso de restricciones (constraints) de SQL en **SQLite3**.
 
-1. Tabla students
-Almacena la información académica y de contacto de los alumnos.
+## 🏗️ Arquitectura de la Base de Datos
 
-    id_students:  Identificador único (Primary Key).
+El esquema se divide en tres entidades principales que permiten gestionar el flujo educativo de la escuela:
 
-    name_students:  Nombre completo del estudiante.
+1.  **Recipes (Recetas):** El catálogo de platillos.
+2.  **Chefs (Instructores):** El personal docente especializado.
+3.  **Classes (Clases):** La entidad de relación que conecta a un instructor con una receta específica.
 
-    age_students:  Edad.
+---
 
-    email_students:  Correo electrónico de contacto.
+## 🛡️ Implementación de Constraints (Restricciones)
 
-2. Tabla chefs
-Almacena el perfil profesional de los instructores de cocina.
+Para garantizar que la información sea verídica y consistente, se han aplicado los siguientes candados lógicos:
 
-    id_chefs:  Identificador único (Primary Key).
+### 1. Integridad de Entidad (Primary Keys)
+Cada tabla cuenta con un `id` único autoincremental (`PRIMARY KEY AUTOINCREMENT`), asegurando que no existan registros duplicados y facilitando la indexación.
 
-    name_chefs:  Nombre del chef.
+### 2. Validación de Datos (CHECK Constraints)
+* **Dificultad controlada:** En la tabla `recipes`, el campo `difficulty_level` solo acepta valores entre **1 y 3** mediante un constraint `CHECK`. Esto evita errores de rango en la calificación de las recetas.
+* **Estado lógico:** En la tabla `chefs`, el campo `is_active` utiliza un valor por defecto (`DEFAULT 1`) y está pensado para manejar estados binarios (Activo/Inactivo).
 
-    specialty_chefs:  Área de especialización culinaria.
+### 3. Integridad de Dominio (NOT NULL & UNIQUE)
+* **Campos Obligatorios:** Se aplicó `NOT NULL` en nombres, especialidades y contactos para evitar registros incompletos.
+* **No Duplicidad:** El campo `phone_number` en la tabla de chefs cuenta con el constraint `UNIQUE`, impidiendo que dos instructores compartan el mismo número de contacto.
 
-    phone_number:  Número telefónico de contacto.
+### 4. Integridad Referencial (Foreign Keys)
+La tabla `classes` actúa como el motor relacional del sistema:
+* `id_chef` referencia a `id_chefs` en la tabla de instructores.
+* `id_recipe` referencia a `id_recipe` en la tabla de recetas.
+* **Nota:** Se requiere ejecutar `PRAGMA foreign_keys = ON;` para activar la validación de estas llaves en SQLite.
 
-🚀 Instalación y Ejecución
-Para levantar la base de datos y visualizar los resultados directamente desde tu terminal, sigue estos pasos:
+---
 
-1. Requisitos previos
-Asegúrate de tener instalado SQLite3 en tu sistema. Puedes verificarlo ejecutando sqlite3 --version en tu terminal.
+## 🚀 Ejecución del Script
 
-2. Ejecución del Script
-Para crear la base de datos (denominada cooking_school.db), cargar las tablas y ejecutar las consultas automáticas, utiliza el siguiente comando:
+Para reconstruir el esquema y verificar las tablas, ejecuta el siguiente comando en tu terminal:
 
-Desde la consola de Git Bash
-sqlite3 cooking_school.db < starter/project.sql
-    Nota: Este comando redirige el contenido de tu archivo .sql al motor de SQLite, procesando todas las instrucciones de forma secuencial.
+```bash
+sqlite3 mi_escuela.db < proyecto_semanal.sql
 
-🔍 Consultas Incluidas
-El script incluye las siguientes operaciones de lectura:
+🛠️ Comandos de Verificación incluidos
+El script finaliza con comandos administrativos para validar la estructura:
 
-Listado Completo: Visualización de todos los registros de ambas tablas.
+.tables: Lista las tablas creadas.
 
-Ordenamiento Alfabético: Consultas configuradas para listar nombres de estudiantes y chefs de la A a la Z.
-
-Métricas Rápidas: Uso de la función COUNT(*) para obtener el total de registros en cada categoría.
-
-📝 Ejemplo de Consulta Principal
-SQL
--- Obtener el total de chefs registrados
-SELECT COUNT(*) AS total_chefs FROM chefs;
-
--- Listar estudiantes ordenados por nombre
-SELECT name_students FROM students
-ORDER BY name_students ASC;
-
-📝 Ejemplo de Código
-
-    CREATE TABLE students(  
-        id_students INTEGER PRIMARY KEY,
-        name_students TEXT NOT NULL,
-        age_students INTEGER NOT NULL,
-        email_students TEXT NOT NULL
-    );
+PRAGMA table_info(): Despliega los metadatos y constraints de cada columna.
