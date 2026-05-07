@@ -1,50 +1,65 @@
-# 🍳 Sistema de Gestión Gastronómica: Diseño de Esquemas (DDL)
+# 🍳 Sistema de Gestión de Escuela de Cocina - SQL
 
-Este proyecto presenta el diseño de una base de datos relacional para una **Escuela de Cocina**, enfocándose en la integridad de los datos mediante el uso de restricciones (constraints) de SQL en **SQLite3**.
+Este proyecto contiene el diseño e implementación de una base de datos relacional para gestionar una escuela de cocina. Incluye la definición de esquemas, manejo de entidades de estudiantes, chefs, recetas y clases, además de operaciones fundamentales de manipulación de datos (DML).
 
-## 🏗️ Arquitectura de la Base de Datos
+## 📊 Modelo de Datos
 
-El esquema se divide en tres entidades principales que permiten gestionar el flujo educativo de la escuela:
+La base de datos está compuesta por las siguientes entidades principales:
 
-1.  **Recipes (Recetas):** El catálogo de platillos.
-2.  **Chefs (Instructores):** El personal docente especializado.
-3.  **Classes (Clases):** La entidad de relación que conecta a un instructor con una receta específica.
+1.  **Students (Estudiantes):** Registro de alumnos con validación de edad mínima (16 años) y niveles de aprendizaje.
+2.  **Chefs:** Información de instructores, especialidades y estado de actividad.
+3.  **Recipes (Recetas):** Catálogo de platos con niveles de dificultad (1 al 3) y tiempos de preparación.
+4.  **Classes (Clases):** Tabla relacional que vincula a los chefs con las recetas que imparten.
 
----
 
-## 🛡️ Implementación de Constraints (Restricciones)
-
-Para garantizar que la información sea verídica y consistente, se han aplicado los siguientes candados lógicos:
-
-### 1. Integridad de Entidad (Primary Keys)
-Cada tabla cuenta con un `id` único autoincremental (`PRIMARY KEY AUTOINCREMENT`), asegurando que no existan registros duplicados y facilitando la indexación.
-
-### 2. Validación de Datos (CHECK Constraints)
-* **Dificultad controlada:** En la tabla `recipes`, el campo `difficulty_level` solo acepta valores entre **1 y 3** mediante un constraint `CHECK`. Esto evita errores de rango en la calificación de las recetas.
-* **Estado lógico:** En la tabla `chefs`, el campo `is_active` utiliza un valor por defecto (`DEFAULT 1`) y está pensado para manejar estados binarios (Activo/Inactivo).
-
-### 3. Integridad de Dominio (NOT NULL & UNIQUE)
-* **Campos Obligatorios:** Se aplicó `NOT NULL` en nombres, especialidades y contactos para evitar registros incompletos.
-* **No Duplicidad:** El campo `phone_number` en la tabla de chefs cuenta con el constraint `UNIQUE`, impidiendo que dos instructores compartan el mismo número de contacto.
-
-### 4. Integridad Referencial (Foreign Keys)
-La tabla `classes` actúa como el motor relacional del sistema:
-* `id_chef` referencia a `id_chefs` en la tabla de instructores.
-* `id_recipe` referencia a `id_recipe` en la tabla de recetas.
-* **Nota:** Se requiere ejecutar `PRAGMA foreign_keys = ON;` para activar la validación de estas llaves en SQLite.
 
 ---
 
-## 🚀 Ejecución del Script
+## 🚀 Estructura de las Tablas
 
-Para reconstruir el esquema y verificar las tablas, ejecuta el siguiente comando en tu terminal:
+### Estudiantes (`students`)
+| Campo | Tipo | Restricción |
+| :--- | :--- | :--- |
+| `id_students` | INTEGER | PRIMARY KEY |
+| `name_students`| TEXT | NOT NULL |
+| `age_students` | INTEGER | CHECK (>= 16) |
+| `email_students`| TEXT | UNIQUE, NOT NULL |
 
-```bash
-sqlite3 my_school.db < project2.sql
+### Recetas (`recipes`)
+| Campo | Tipo | Restricción |
+| :--- | :--- | :--- |
+| `id_recipe` | INTEGER | PRIMARY KEY AUTOINCREMENT |
+| `difficulty_level`| INTEGER | CHECK (1-3) |
 
-🛠️ Comandos de Verificación incluidos
-El script finaliza con comandos administrativos para validar la estructura:
+### Chefs (`chefs`)
+| Campo | Tipo | Restricción |
+| :--- | :--- | :--- |
+| `id_chefs` | INTEGER | PRIMARY KEY AUTOINCREMENT |
+| `is_active` | INTEGER | DEFAULT 1 (Activo) |
 
-.tables: Lista las tablas creadas.
+---
 
-PRAGMA table_info(): Despliega los metadatos y constraints de cada columna.
+## 🛠️ Operaciones Implementadas
+
+El script incluye ejemplos prácticos de:
+
+* **Inserción masiva de datos:** Carga inicial de 15 registros por tabla para pruebas de entorno.
+* **Actualizaciones (UPDATE):**
+    * Modificación de datos específicos por ID.
+    * Actualización masiva basada en lógica de negocio (ej. incrementar tiempo de preparación en recetas de dificultad alta).
+* **Eliminación Segura (DELETE):** Limpieza de registros en tablas relacionadas utilizando condiciones específicas.
+* **Verificación:** Uso de comandos `PRAGMA` y `SELECT` para validar la integridad de los datos.
+
+## ⚙️ Cómo ejecutar el script
+
+Este código está diseñado para ser ejecutado en **SQLite**.
+
+1.  Asegúrate de tener instalado SQLite en tu sistema.
+2.  Carga el archivo mediante la terminal:
+    ```bash
+    sqlite3 escuela_cocina.db < script.sql
+    ```
+3.  O copia y pega el contenido en cualquier cliente SQL (DBeaver, DB Browser for SQLite, etc.).
+
+---
+> **Nota:** El script incluye sentencias `DROP TABLE` al inicio para permitir una ejecución limpia desde cero en entornos de desarrollo.
