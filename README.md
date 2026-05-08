@@ -1,65 +1,17 @@
-# 🍳 Sistema de Gestión de Escuela de Cocina - SQL
+🍳 Sistema de Gestión - Academia de Cocina
+Este proyecto contiene la estructura de base de datos y las consultas SQL para gestionar una academia de gastronomía. Permite administrar estudiantes, chefs, recetas y clases de manera eficiente.
 
-Este proyecto contiene el diseño e implementación de una base de datos relacional para gestionar una escuela de cocina. Incluye la definición de esquemas, manejo de entidades de estudiantes, chefs, recetas y clases, además de operaciones fundamentales de manipulación de datos (DML).
+📊 Estructura de la Base de Datos
+El sistema se basa en 4 tablas principales:students: Registro de alumnos, su nivel y fecha de ingreso.chefs: 
+    Personal docente y su especialidad.recipes: Catálogo de platillos con niveles de dificultad (1-3).classes: Tabla relacional que conecta a los chefs con las recetas que imparten.🛠️ Consultas PrincipalesEl archivo SQL incluye los siguientes casos de uso:1. Reporte de Estudiantes (Alias)Consulta formateada para exportar datos con encabezados claros en español.SQLSELECT name_students AS "nombre estudiante", last_name AS "apellido", ...
 
-## 📊 Modelo de Datos
+2. Filtros de NegocioRecetas Rápidas: 
+Selección de platillos con tiempo de preparación $\le 30$ minutos.Segmentación de Alumnos: Filtrado de estudiantes menores de 25 años en nivel avanzado.Control de Personal: Identificación de chefs de "Cocina Española" que se encuentran inactivos.
 
-La base de datos está compuesta por las siguientes entidades principales:
+3. Ordenamiento y Top-NMuestra los 5 chefs principales ordenados alfabéticamente de forma descendente según su especialidad.4. Paginación de DatosImplementación de navegación para la interfaz de usuario:
+    Página 1: Primeras 3 clases registradas.
+    Página 2: Siguientes 3 estudiantes registrados.
 
-1.  **Students (Estudiantes):** Registro de alumnos con validación de edad mínima (16 años) y niveles de aprendizaje.
-2.  **Chefs:** Información de instructores, especialidades y estado de actividad.
-3.  **Recipes (Recetas):** Catálogo de platos con niveles de dificultad (1 al 3) y tiempos de preparación.
-4.  **Classes (Clases):** Tabla relacional que vincula a los chefs con las recetas que imparten.
+🚀 Cómo usarEjecute el script de creación de tablas.Cargue los datos de prueba (INSERT INTO).Ejecute las consultas de verificación para obtener los reportes.
 
-
-
----
-
-## 🚀 Estructura de las Tablas
-
-### Estudiantes (`students`)
-| Campo | Tipo | Restricción |
-| :--- | :--- | :--- |
-| `id_students` | INTEGER | PRIMARY KEY |
-| `name_students`| TEXT | NOT NULL |
-| `age_students` | INTEGER | CHECK (>= 16) |
-| `email_students`| TEXT | UNIQUE, NOT NULL |
-
-### Recetas (`recipes`)
-| Campo | Tipo | Restricción |
-| :--- | :--- | :--- |
-| `id_recipe` | INTEGER | PRIMARY KEY AUTOINCREMENT |
-| `difficulty_level`| INTEGER | CHECK (1-3) |
-
-### Chefs (`chefs`)
-| Campo | Tipo | Restricción |
-| :--- | :--- | :--- |
-| `id_chefs` | INTEGER | PRIMARY KEY AUTOINCREMENT |
-| `is_active` | INTEGER | DEFAULT 1 (Activo) |
-
----
-
-## 🛠️ Operaciones Implementadas
-
-El script incluye ejemplos prácticos de:
-
-* **Inserción masiva de datos:** Carga inicial de 15 registros por tabla para pruebas de entorno.
-* **Actualizaciones (UPDATE):**
-    * Modificación de datos específicos por ID.
-    * Actualización masiva basada en lógica de negocio (ej. incrementar tiempo de preparación en recetas de dificultad alta).
-* **Eliminación Segura (DELETE):** Limpieza de registros en tablas relacionadas utilizando condiciones específicas.
-* **Verificación:** Uso de comandos `PRAGMA` y `SELECT` para validar la integridad de los datos.
-
-## ⚙️ Cómo ejecutar el script
-
-Este código está diseñado para ser ejecutado en **SQLite**.
-
-1.  Asegúrate de tener instalado SQLite en tu sistema.
-2.  Carga el archivo mediante la terminal:
-    ```bash
-    sqlite3 escuela_cocina.db < script.sql
-    ```
-3.  O copia y pega el contenido en cualquier cliente SQL (DBeaver, DB Browser for SQLite, etc.).
-
----
-> **Nota:** El script incluye sentencias `DROP TABLE` al inicio para permitir una ejecución limpia desde cero en entornos de desarrollo.
+📝 Notas de desarrolloLa base de datos utiliza SQLite.Se han implementado restricciones de integridad como CHECK para la edad de los estudiantes ($\ge 16$ años) y niveles de dificultad de recetas (1 a 3).
