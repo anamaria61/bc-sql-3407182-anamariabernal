@@ -14,7 +14,7 @@ Almacena la información académica y de contacto de los alumnos.
 
    * **email_students:**  Correo electrónico de contacto.
 
-2. Tabla chefs
+## 2. Tabla chefs
 Almacena el perfil profesional de los instructores de cocina.
 
    * **id_chefs:**  Identificador único (Primary Key).
@@ -36,7 +36,7 @@ Para crear la base de datos (denominada cooking_school.db), cargar las tablas y 
 
 * Desde la consola de Git Bash
 sqlite3 cooking_school.db < starter/project.sql
-    Nota: Este comando redirige el contenido de tu archivo .sql al motor de SQLite, procesando todas las instrucciones de forma secuencial.
+    * **Nota:** Este comando redirige el contenido de tu archivo .sql al motor de SQLite, procesando todas las instrucciones de forma secuencial.
 
 ## 🔍 Consultas Incluidas
 El script incluye las siguientes operaciones de lectura:
