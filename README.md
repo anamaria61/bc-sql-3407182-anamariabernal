@@ -3,10 +3,10 @@ Este proyecto contiene la estructura de base de datos y las consultas SQL para g
 
 ## 📊 Estructura de la Base de Datos
 El sistema se basa en 4 tablas principales:
-    **students:** Registro de alumnos, su nivel y fecha de ingreso.
-    **chefs:** Personal docente y su especialidad.
-    **recipes:** Catálogo de platillos con niveles de dificultad (1-3).
-    **classes:** Tabla relacional que conecta a los chefs con las recetas que imparten.
+* **students:** Registro de alumnos, su nivel y fecha de ingreso.
+    * **chefs:** Personal docente y su especialidad.
+    * **recipes:** Catálogo de platillos con niveles de dificultad (1-3).
+    * **classes:** Tabla relacional que conecta a los chefs con las recetas que imparten.
 
 ## 🛠️ Consultas Principales
 El archivo SQL incluye los siguientes casos de uso:
@@ -17,13 +17,14 @@ El archivo SQL incluye los siguientes casos de uso:
 
 ## 2. Filtros de NegocioRecetas Rápidas: 
 Selección de platillos con tiempo de preparación $\le 30$ minutos.
-Segmentación de Alumnos: Filtrado de estudiantes menores de 25 años en nivel avanzado.
-Control de Personal: Identificación de chefs de "Cocina Española" que se encuentran inactivos.
+* Segmentación de Alumnos: Filtrado de estudiantes menores de 25 años en nivel avanzado.
+* Control de Personal: Identificación de chefs de "Cocina Española" que se encuentran inactivos.
 
 ---
 
 
-## 3. Ordenamiento y Top-NMuestra los 5 chefs principales ordenados alfabéticamente de forma descendente según su especialidad.
+## 3. Ordenamiento y Top-N
+Muestra los 5 chefs principales ordenados alfabéticamente de forma descendente según su especialidad.
 
 ---
 
