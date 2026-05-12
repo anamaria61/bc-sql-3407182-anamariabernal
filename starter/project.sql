@@ -1,52 +1,62 @@
 -- ============================================
--- PROYECTO SEMANAL: DDL de tu Dominio
--- Semana 02 — DDL: Diseño de Esquemas
+-- PROYECTO SEMANAL: Operadores y Filtros
+-- Semana 05 — BETWEEN, IN, LIKE
 -- ============================================
 
-DROP TABLE IF EXISTS chefs;
+-- Nuevas columnas numéricas para cada tabla.
+
+--Recipes
+ALTER TABLE recipes ADD COLUMN calories INTEGER DEFAULT 0; --calorias
+ALTER TABLE recipes ADD COLUMN servings INTEGER DEFAULT 1; --porciones
+
+--Students
+ALTER TABLE students ADD COLUMN final_grade REAL DEFAULT 0.0; --nota final
+ALTER TABLE students ADD COLUMN registration_value DECIMAL(10, 2) DEFAULT 0.0; --valor de matricula
+
+--Chefs
+ALTER TABLE chefs ADD COLUMN salary DECIMAL(10,2) DEFAULT 0.0; --salario
+ALTER TABLE chefs ADD COLUMN years_experience Integer DEFAULT 1 
+CHECK(years_experience >= 0); --años de experiencia
+
+--Classes
+ALTER TABLE classes ADD COLUMN max_capacity INTEGER DEFAULT 20; --máxima capacidad
+ALTER TABLE classes ADD COLUMN class_duration REAL DEFAULT 2.0; --horas
+-- ============================================
+-- CONSULTA 1: Filtro con BETWEEN
+-- ============================================
+-- TODO: Filtra registros de tu entidad principal usando un rango
+--       (precio, cantidad, fecha, id, etc.)
+-- SELECT ...
+-- FROM   tu_tabla
+-- WHERE  columna_numerica BETWEEN valor_min AND valor_max;
+
 
 -- ============================================
--- TABLA 1: Entidad principal de tu dominio
+-- CONSULTA 2: Filtro con IN
 -- ============================================
-CREATE TABLE recipes (
-    id_recipe INTEGER PRIMARY KEY AUTOINCREMENT,
-    name_recipe TEXT NOT NULL,
-    difficulty_level INTEGER CHECK(difficulty_level BETWEEN 1 AND 3),
-    prep_time_minutes INTEGER
-);
+-- TODO: Filtra por una lista de categorías, estados o ids relevantes
+-- SELECT ...
+-- FROM   tu_tabla
+-- WHERE  columna_categorica IN (valor1, valor2, valor3);
+
 
 -- ============================================
--- TABLA 2: Segunda entidad de tu dominio
+-- CONSULTA 3: Búsqueda de texto con LIKE
 -- ============================================
+-- TODO: Busca registros cuyo nombre o descripción contenga un patrón
+-- SELECT ...
+-- FROM   tu_tabla
+-- WHERE  columna_texto LIKE '%patron%';
 
-CREATE TABLE IF NOT EXISTS chefs (
-    id_chefs INTEGER PRIMARY KEY AUTOINCREMENT,
-    name_chef TEXT NOT NULL,
-    last_name TEXT NOT NULL,
-    phone_number TEXT NOT NULL UNIQUE,
-    specialty_chef TEXT NOT NULL,
-    is_active   INTEGER NOT NULL DEFAULT 1
-);
 
 -- ============================================
--- TABLA 3: Tercera entidad o tabla de relación
+-- CONSULTA 4: Filtro combinado (≥ 3 operadores)
 -- ============================================
-
---RELACIÓN ENTRE LOS CHEFS Y LAS RECETAS
-CREATE TABLE IF NOT EXISTS classes (
-    id_class INTEGER PRIMARY KEY AUTOINCREMENT,
-    class_name TEXT NOT NULL,
-    id_chef INTEGER,
-    id_recipe INTEGER,
-    FOREIGN KEY (id_chef) REFERENCES chefs(id_chefs),
-    FOREIGN KEY (id_recipe) REFERENCES recipes(id_recipe)
-);
-
--- ============================================
--- VERIFICACIÓN
--- ============================================
-
-.tables
-PRAGMA table_info(recipes);
-PRAGMA table_info(chefs);
-PRAGMA table_info(classes);
+-- TODO: Combina BETWEEN, IN y/o LIKE con AND/OR
+--       Usa paréntesis si mezclas AND y OR
+-- SELECT ...
+-- FROM   tu_tabla
+-- WHERE  condicion1
+--   AND  condicion2
+--   AND  condicion3
+-- ORDER BY columna_relevante;
