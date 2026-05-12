@@ -1,44 +1,52 @@
-CREATE TABLE students(  
-    id_students INTEGER PRIMARY KEY,
-    name_students TEXT NOT NULL,
-    age_students INTEGER NOT NULL,
-    email_students TEXT NOT NULL
+-- ============================================
+-- PROYECTO SEMANAL: DDL de tu Dominio
+-- Semana 02 — DDL: Diseño de Esquemas
+-- ============================================
+
+DROP TABLE IF EXISTS chefs;
+
+-- ============================================
+-- TABLA 1: Entidad principal de tu dominio
+-- ============================================
+CREATE TABLE recipes (
+    id_recipe INTEGER PRIMARY KEY AUTOINCREMENT,
+    name_recipe TEXT NOT NULL,
+    difficulty_level INTEGER CHECK(difficulty_level BETWEEN 1 AND 3),
+    prep_time_minutes INTEGER
 );
 
-CREATE TABLE chefs(
-    id_chefs INTEGER PRIMARY KEY,
-    name_chefs TEXT NOT NULL,
-    specialty_chefs TEXT NOT NULL,
-    phone_number TEXT NOT NULL
+-- ============================================
+-- TABLA 2: Segunda entidad de tu dominio
+-- ============================================
+
+CREATE TABLE IF NOT EXISTS chefs (
+    id_chefs INTEGER PRIMARY KEY AUTOINCREMENT,
+    name_chef TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    phone_number TEXT NOT NULL UNIQUE,
+    specialty_chef TEXT NOT NULL,
+    is_active   INTEGER NOT NULL DEFAULT 1
 );
 
-INSERT INTO students(id_students, name_students, age_students, email_students) VALUES
-(1, 'Alice', 25, 'alice@example.com'),
-(2, 'Bob', 30, 'bob@example.com'),
-(3, 'Charlie', 35, 'charlie@example.com'),
-(4, 'David', 40, 'david@example.com'),
-(5, 'Eve', 45, 'eve@example.com');
+-- ============================================
+-- TABLA 3: Tercera entidad o tabla de relación
+-- ============================================
 
-INSERT INTO chefs (id_chefs, name_chefs, specialty_chefs, phone_number) VALUES
-(1, 'Chef Adrián', 'Alta Cocina Mexicana y Salsas', '351 234 5678'),
-(2, 'Chef Isabella', 'Pastelería y Repostería Fina', '339 069 8765'),
-(3, 'Chef Kenji', 'Cocina Japonesa y Arte del Sushi', '381 567 8901'),
-(4, 'Chef Beatriz', 'Cocina Mediterránea y Saludable', '341 234 5678'),
-(5, 'Chef Marcus', 'Técnicas Francesas y Salsas Clásicas', '312 345 6789');
+--RELACIÓN ENTRE LOS CHEFS Y LAS RECETAS
+CREATE TABLE IF NOT EXISTS classes (
+    id_class INTEGER PRIMARY KEY AUTOINCREMENT,
+    class_name TEXT NOT NULL,
+    id_chef INTEGER,
+    id_recipe INTEGER,
+    FOREIGN KEY (id_chef) REFERENCES chefs(id_chefs),
+    FOREIGN KEY (id_recipe) REFERENCES recipes(id_recipe)
+);
 
-SELECT * FROM students;
+-- ============================================
+-- VERIFICACIÓN
+-- ============================================
 
-SELECT name_students FROM students
-ORDER BY name_students ASC;
-
-SELECT COUNT(*) AS total_students
-FROM  students;
-
-
-SELECT * FROM chefs;
-
-SELECT name_chefs FROM chefs
-ORDER BY name_chefs ASC;
-
-SELECT COUNT(*) AS total_chefs
-FROM chefs;
+.tables
+PRAGMA table_info(recipes);
+PRAGMA table_info(chefs);
+PRAGMA table_info(classes);
