@@ -41,4 +41,4 @@ SELECT name_chefs FROM chefs
 ORDER BY name_chefs ASC;
 
 SELECT COUNT(*) AS total_chefs
-FROM chefs;
+FROM chefs;   
