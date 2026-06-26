@@ -21,7 +21,7 @@ CHECK(years_experience >= 0); --años de experiencia
 --Classes
 ALTER TABLE classes ADD COLUMN max_capacity INTEGER DEFAULT 20; --máxima capacidad
 ALTER TABLE classes ADD COLUMN class_duration REAL DEFAULT 2.0; --
-
+                                                        
 
 UPDATE students SET registration_value = 85000.00 WHERE id_students = 1;
 UPDATE students SET registration_value = 75000.00 WHERE id_students = 2;
