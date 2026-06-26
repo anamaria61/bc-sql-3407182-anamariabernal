@@ -63,5 +63,4 @@ ORDER BY name_students ASC;
         name_students TEXT NOT NULL,
         age_students INTEGER NOT NULL,
         email_students TEXT NOT NULL
-    );
-        
+    ); 
