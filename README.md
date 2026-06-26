@@ -51,7 +51,7 @@ Búsqueda inteligente de recetas que contienen fragmentos de texto específicos 
 * FROM recipes
 * WHERE name_recipe LIKE '%am%';
 
----
+-------------
 
 ### 4. Súper Filtro de Talento (Combinado)
 Consulta compleja para identificar chefs con un perfil específico:
