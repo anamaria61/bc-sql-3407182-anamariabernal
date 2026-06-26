@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS chefs (
 
 -- ============================================
 -- TABLA 3: Tercera entidad o tabla de relación
--- ============================================
+-- ===========================================
 
 --RELACIÓN ENTRE LOS CHEFS Y LAS RECETAS
 CREATE TABLE IF NOT EXISTS classes (
