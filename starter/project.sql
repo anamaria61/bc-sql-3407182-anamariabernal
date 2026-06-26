@@ -26,7 +26,6 @@ ALTER TABLE classes ADD COLUMN class_duration REAL DEFAULT 2.0; --
 UPDATE students SET registration_value = 85000.00 WHERE id_students = 1;
 UPDATE students SET registration_value = 75000.00 WHERE id_students = 2;
 UPDATE chefs SET salary = 1300000.00, years_experience = 2 WHERE last_name LIKE '%a%';
-
 --Nuevos inserts
 INSERT INTO students (name_students, last_name, age_students, email_students, registration_date, level, final_grade, registration_value) VALUES
 ('Alejandro', 'Ruiz', 22, 'aruiz_chef@gmail.com', '2024-04-01', 'Intermedio', 4.5, 85000.00),
