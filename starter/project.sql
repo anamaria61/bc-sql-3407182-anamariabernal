@@ -9,7 +9,7 @@
 ALTER TABLE recipes ADD COLUMN calories INTEGER DEFAULT 0; --calorias
 ALTER TABLE recipes ADD COLUMN servings INTEGER DEFAULT 1; --porciones
 
---Students
+--Students 
 ALTER TABLE students ADD COLUMN final_grade REAL DEFAULT 0.0; --nota final
 ALTER TABLE students ADD COLUMN registration_value DECIMAL(10, 2) DEFAULT 0.0; --valor de matricula
 
