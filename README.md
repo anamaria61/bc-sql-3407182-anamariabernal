@@ -48,3 +48,4 @@ El script finaliza con comandos administrativos para validar la estructura:
 .tables: Lista las tablas creadas.
 
 PRAGMA table_info(): Despliega los metadatos y constraints de cada columna.
+....
