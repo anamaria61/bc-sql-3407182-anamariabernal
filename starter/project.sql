@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS classes (
 );
 
 -- ============================================
--- VERIFICACIÓN
+-- VERIFICACIÓN 
 -- ============================================
 
 .tables
