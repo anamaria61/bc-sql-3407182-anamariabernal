@@ -56,7 +56,7 @@ Este código está diseñado para ser ejecutado en **SQLite**.
 
 1.  Asegúrate de tener instalado SQLite en tu sistema.
 2.  Carga el archivo mediante la terminal:
-    ```bash
+    ```bash 
     sqlite3 escuela_cocina.db < script.sql
     ```
 3.  O copia y pega el contenido en cualquier cliente SQL (DBeaver, DB Browser for SQLite, etc.).
