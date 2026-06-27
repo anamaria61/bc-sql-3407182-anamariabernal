@@ -70,3 +70,4 @@ Este módulo demuestra la capacidad de extraer conocimiento accionable a partir 
 
 ### 2.  **Limpieza de Datos:**
     Has usado `ROUND(..., 2)`, lo cual es excelente para que el README y los reportes se vean limpios y profesionales.
+  
