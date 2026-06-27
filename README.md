@@ -165,7 +165,7 @@ Durante esta práctica se fortalecieron conocimientos relacionados con:
 * Presentación de resultados amigables con `COALESCE()`.
 * Aplicación de restricciones para garantizar la integridad de la información.
 
----
+--- 
 
 ## ⚙️ Ejecución del Proyecto
 
