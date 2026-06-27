@@ -25,7 +25,7 @@ SELECT
     prep_time_minutes AS "tiempo preparación"
 FROM recipes
 WHERE prep_time_minutes <= 30;
-
+                                                    
 -- ============================================
 -- CONSULTA 3: Filtro combinado (AND u OR)
 -- ============================================
