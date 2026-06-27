@@ -39,3 +39,9 @@ SELECT
         'Tiempo no definido'
     ) AS tiempo_preparacion
 FROM recipes;
+
+-- SELECT COUNT(*)
+-- FROM recipes
+
+-- SELECT COUNT(*)
+-- FROM chefs
