@@ -22,7 +22,7 @@ FROM students;
 -- ============================================
 -- TODO: Obtén el valor mínimo y máximo de la columna numérica
 SELECT
-	MIN(registration_value) AS minimo,
+	MIN(registration_value) AS minimo, 
 	MAX(registration_value) AS maximo
 FROM students;
 
