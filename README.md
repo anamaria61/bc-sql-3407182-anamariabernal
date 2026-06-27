@@ -198,7 +198,7 @@ SELECT COUNT(*) FROM chefs;
 SELECT COUNT(*) FROM recipes;
 SELECT COUNT(*) FROM classes;
 ```
-
+---
 ---
 
 ## 🎓 Aprendizajes
